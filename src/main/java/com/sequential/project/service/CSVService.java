@@ -9,7 +9,7 @@ import java.nio.file.StandardOpenOption;
 
 public class CSVService {
 
-    private static final String filename = "./data/results-sequential.csv";
+    private static final String filename = "results-sequential.csv";
 
     private static void createFile() {
         try {
@@ -19,10 +19,12 @@ public class CSVService {
         }
     }
 
-    private static void checkFile() {
+    private static boolean checkFile() {
         if (!Files.exists(Paths.get(filename))) {
             createFile();
+            return false;
         }
+        return true;
     }
 
     private static void appendToCSV(String line) {
@@ -39,8 +41,10 @@ public class CSVService {
     }
 
     public static void initCSV() {
-        checkFile();
-        String line = "Executions,TimeMillis,Category\n";
-        appendToCSV(line);
+        boolean fileExisted = checkFile();
+        if(!fileExisted) {
+            String line = "Executions,TimeMillis,Category" + "\n";
+            appendToCSV(line);
+        }
     }
 }
