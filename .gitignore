@@ -24,3 +24,8 @@ hs_err_pid*
 
 #data
 *.csv
+/target/
+#eclipse
+.classpath
+.project
+.settings

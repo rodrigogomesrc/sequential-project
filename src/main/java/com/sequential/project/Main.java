@@ -11,10 +11,9 @@ public class Main {
 
         SequentialExperiment sequential = new SequentialExperiment();
         CSVService.initCSV();
-
+        Scanner scanner = new Scanner(System.in);
         while (true) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Digite o número de execuções: ");
+            System.out.println("Digite o número de execuções (sequencial): ");
             int executions = scanner.nextInt();
             System.out.println("Executando...");
             ExperimentResult result = sequential.runExperiment(executions);
@@ -25,7 +24,8 @@ public class Main {
             String option = scanner.next();
             if (!option.equals("1")) {
                 break;
-            }
+            }   
         }
+        scanner.close();
     }
 }
