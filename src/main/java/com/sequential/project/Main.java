@@ -4,28 +4,28 @@ import com.sequential.project.model.ExperimentResult;
 import com.sequential.project.model.SequentialExperiment;
 import com.sequential.project.service.CSVService;
 
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-        SequentialExperiment sequential = new SequentialExperiment();
-        CSVService.initCSV();
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.println("Digite o número de execuções (sequencial): ");
-            int executions = scanner.nextInt();
-            System.out.println("Executando...");
-            ExperimentResult result = sequential.runExperiment(executions);
-            CSVService.saveResult(result);
-            System.out.println("Experimento finalizado!");
-
-            System.out.println("Digite 1 para continuar os experimentos ou qualquer outra coisa pra sair: ");
-            String option = scanner.next();
-            if (!option.equals("1")) {
-                break;
-            }   
-        }
-        scanner.close();
+    	final int multiplicator = 20;
+    	int sceneryNumber = 0;
+    	ArrayList<Integer> scenerys = new ArrayList<Integer>(List.of(10, 100, 500, 1000));
+    	CSVService.initCSV();
+    	SequentialExperiment sequential = new SequentialExperiment();
+    	
+    	System.out.println("Iniciando experimentos (Sequencial)");
+    	for (int i =0; i < scenerys.size(); i++) {
+    		sceneryNumber++;
+    		System.out.println("cenário: " + sceneryNumber + " requisições: " + scenerys.get(i));
+            for (int j = 0; j < multiplicator; j++) {
+            	System.out.println("Executando...");
+                ExperimentResult result = sequential.runExperiment(scenerys.get(i), sceneryNumber);
+                CSVService.saveResult(result);
+            }
+    	}
+    	System.out.println("Fim dos experimentos");
     }
 }

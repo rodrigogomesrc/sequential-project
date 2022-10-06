@@ -36,14 +36,14 @@ public class CSVService {
     }
 
     public static void saveResult(ExperimentResult experimentResult) {
-        String line = experimentResult.getExecutions() + "," + experimentResult.getTimeMillis() + "," + experimentResult.getCategory() + "\n";
+        String line = experimentResult.getExecutions() + "," + experimentResult.getTimeMillis() +  "," + experimentResult.getCategory() + "," + experimentResult.getScenery() + "\n";
         appendToCSV(line);
     }
 
     public static void initCSV() {
         boolean fileExisted = checkFile();
         if(!fileExisted) {
-            String line = "Executions,TimeMillis,Category" + "\n";
+            String line = "Executions,TimeMillis,Category,Scenery" + "\n";
             appendToCSV(line);
         }
     }
